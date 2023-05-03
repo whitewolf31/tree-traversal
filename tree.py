@@ -1,5 +1,5 @@
 from node import Node
-
+import pytest
 
 class Tree:
     """ Tree class for binary tree """
@@ -62,27 +62,59 @@ class Tree:
             return self._find(data, node.right)
 
     def deleteTree(self):
-        # TODO 1
+        """ Method for deleting current tree root """
         self.root = None
 
     def printTree(self):
-        # TODO 1
+        """ Method for printing current tree root in order """
         if self.root is not None:
             self._printInorderTree(self.root)
 
     def _printInorderTree(self, node):
-        # TODO 1
+        """ Method to print data from tree and traverse tree in order 
+
+        Args:
+            node (Node): Current node root
+
+        Returns:
+            None
+        """
         if node is not None:
             self._printInorderTree(node.left)
             print(str(node.data) + ' ')
             self._printInorderTree(node.right)
 
     def _printPreorderTree(self, node):
-        # TODO 2
-        pass
+        if node is not None:
+            print(str(node.data) + ' ')
+            self._printPreorderTree(node.left)
+            self._printPreorderTree(node.right)
+        
 
     def _printPostorderTree(self, node):
-        # TODO 2
-        pass
+        if node is not None:
+            self._printPostorderTree(node.left)
+            self._printPostorderTree(node.right)
+            print(str(node.data) + ' ')
+        
 
+@pytest.fixture
+def tree():
+    tree = Tree()
+    tree.add(1)
+    tree.add(2)
+    tree.add(3)
+    return tree
+
+def test_tree_found(tree):
+    foundNode = tree.find(2)
+
+    assert foundNode is not None
+
+    assert foundNode.data is 2
+
+def test_tree_not_found(tree):
+    foundNode = tree.find(10)
+
+    assert foundNode is None
 
