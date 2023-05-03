@@ -106,6 +106,7 @@ def tree():
     tree.add(3)
     tree.add(4)
     tree.add(5)
+    tree.add(6)
     return tree
 
 def test_tree_found(tree):
